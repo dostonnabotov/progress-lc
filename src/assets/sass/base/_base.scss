@@ -1,0 +1,11 @@
+@use "../abstracts" as *;
+
+body {
+  font-family: $ff-primary;
+  font-size: $fs-base;
+  line-height: 1.5;
+}
+
+main {
+  padding-block: var(--size-fluid-3);
+}

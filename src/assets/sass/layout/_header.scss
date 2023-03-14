@@ -1,0 +1,138 @@
+/**
+ * Quick explanation on the implementation of navigation bar.
+ *
+ * 1. Make sure that absolute-positioned child elements lives within its parent
+ *    element rather than <body> element.
+ * 2. Use the `id` attribute would indicate that the `skip-to-content` cannot be 
+ *    used in somewhere else except for navigation bar.
+ * 3. Prevent slide-in and slide-out overflows, caused by .primary-nav element.
+ * 4. On large screens, remove `mobile-nav-toggle` button completely from the DOM.
+ *    So, it cannot be accessed via assistive technologies or keyboard navigation.
+ * 5. Allow `.primary-nav` to be scrollable when screen height is very small.
+ * 6. When accessed through keyboard navigation, display it on the screen.
+ *    is currently rendered at 480px high. Let’s…
+ * 7. Default state values.
+ * 8. Cover the entire screen when screen is very small.
+ *
+ */
+
+.primary-header-wrapper {
+  background-color: var(--gray-0);
+  padding-block: var(--size-fluid-2);
+  box-shadow: 0 5px 5px 3px rgba(0, 0, 0, 0.05);
+}
+
+.primary-header {
+  position: relative; /* [1] */
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.site-logo {
+  font-weight: 700;
+}
+
+#skip-nav {
+  /* [2] */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.primary-nav {
+  overflow-x: hidden; /* [3] */
+}
+
+.primary-nav ul {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  font-weight: 400;
+}
+
+.nav-link[aria-current="page"] {
+  font-weight: 700;
+}
+
+.mobile-nav-toggle {
+  display: none; /* [4] */
+}
+
+@media (max-width: 40em) {
+  .primary-nav {
+    position: fixed;
+    inset: 0 0 0 30%;
+    overflow-y: auto; /* [5] */
+
+    background-color: #f2f2f2;
+    padding-inline: min(3rem, 10vw);
+    padding-block: min(15rem, 30vh);
+
+    transition: transform 250ms ease-out;
+    z-index: 100;
+  }
+
+  .primary-nav[data-visible="false"] {
+    transform: translateX(100%);
+  }
+
+  .primary-nav[data-visible="true"] {
+    transform: translateX(0);
+  }
+
+  .primary-nav:focus-within {
+    transform: translateX(0); /* [6] */
+  }
+
+  .primary-nav ul {
+    flex-direction: column;
+  }
+
+  .mobile-nav-toggle {
+    --size: 1.5rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    display: block;
+    background: none;
+    border: 0;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .mobile-nav-toggle svg {
+    width: var(--size);
+    aspect-ratio: 1 / 1;
+  }
+
+  .open-icon {
+    display: block; /* [7] */
+  }
+
+  .close-icon {
+    display: none; /* [7] */
+  }
+
+  .mobile-nav-toggle[aria-expanded="true"] .open-icon {
+    display: none;
+  }
+
+  .mobile-nav-toggle[aria-expanded="true"] .close-icon {
+    display: block;
+  }
+}
+
+@media (max-width: 30em) {
+  .primary-nav {
+    inset: 0; /* [8] */
+  }
+}

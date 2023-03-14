@@ -1,10 +1,11 @@
 ---
-title: Home
+title: Progress LC
 layout: "layouts/base.njk"
 eleventyNavigation:
   key: Home
   order: 1
 ---
+
 
 {% set maxPosts = collections.posts.length %}
 <h1>
@@ -15,3 +16,4 @@ eleventyNavigation:
 {% include "layouts/posts.njk" %}
 
 <p>More posts can be found in <a href="{{ '/blog/' | url }}">the blog</a>.</p>
+

@@ -1,0 +1,52 @@
+.cards {
+  display: grid;
+  gap: var(--size-fluid-3);
+  padding-block: var(--size-fluid-2);
+}
+
+.card {
+  max-width: 70ch;
+}
+
+.card__img-container {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  aspect-ratio: 16 / 9;
+}
+
+.card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card__cta {
+  position: relative;
+  display: inline-flex;
+  gap: 0.35em;
+
+  text-decoration: none;
+  font-weight: 700;
+  color: inherit;
+
+  transition: 250ms ease-in-out;
+}
+
+.card__cta:is(:hover, :focus) {
+  // TODO: fix this
+  color: var(--clr-primary);
+}
+
+.card__cta::after {
+  content: "➜";
+  color: inherit;
+  opacity: 0;
+  transition: 250ms ease-in-out;
+}
+
+.card__cta:is(:hover, :focus)::after {
+  opacity: 1;
+  transform: translateX(5px);
+}
