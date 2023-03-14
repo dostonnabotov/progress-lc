@@ -1,0 +1,11 @@
+{
+  "title": "Eleventy",
+  "url": "https://example.com/",
+  "language": "en",
+  "description": "Eleventy Template",
+  "author": {
+    "name": "Eleventy",
+    "email": "youremail@example.com",
+    "url": "https://example.com/about-me/"
+  }
+}
